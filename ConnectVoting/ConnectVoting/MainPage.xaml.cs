@@ -1,4 +1,6 @@
-﻿using Windows.UI.Core;
+﻿using Windows.Foundation.Metadata;
+using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Navigation;
 using ConnectVoting.ViewModel;
 
@@ -13,10 +15,12 @@ namespace ConnectVoting
 			InitializeComponent();
 
 			SystemNavigationManager.GetForCurrentView().BackRequested += SystemNavigationManagerBackRequested;
-
 			Loaded += (s, e) =>
 			{
-				Vm.RunClock();
+				if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
+				{
+					ApplicationView.GetForCurrentView().Title = "Connect Voting";
+				}
 			};
 		}
 
@@ -31,7 +35,6 @@ namespace ConnectVoting
 
 		protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
 		{
-			Vm.StopClock();
 			base.OnNavigatingFrom(e);
 		}
 	}

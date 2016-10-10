@@ -5,86 +5,36 @@
       xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:core="using:Microsoft.Xaml.Interactions.Core"
       x:Class="ConnectVoting.MainPage"
-      mc:Ignorable="d"
-      DataContext="{Binding Main, Source={StaticResource Locator}}">
+      mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="1000"
+      DataContext="{Binding Main, Source={StaticResource Locator}}" Padding="15,15">
 
     <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.906,1.164"
-                                 StartPoint="0.244,-0.159">
-                <GradientStop Color="#FFA20000"
-                              Offset="0" />
-                <GradientStop Color="#FFCD7C10"
-                              Offset="1" />
-            </LinearGradientBrush>
-        </Grid.Background>
-
-        <StackPanel Background="#FF1F1F1F"
-                    Width="300"
-                    HorizontalAlignment="Center"
-                    Height="450"
-                    VerticalAlignment="Center">
-            <Button Content="Increment counter"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    Margin="0,0,0,20"
-                    FontSize="24"
-                    Command="{Binding IncrementCommand, Mode=OneWay}"
-                    Foreground="White" />
-
-            <TextBlock Text="Navigate to page 2"
-                       HorizontalAlignment="Stretch"
-                       VerticalAlignment="Stretch"
-                       Margin="0,0,0,20"
-                       FontSize="24"
-                       Foreground="White"
-                       TextAlignment="Center">
-            	<interactivity:Interaction.Behaviors>
-            		<core:EventTriggerBehavior EventName="Tapped">
-            			<core:InvokeCommandAction Command="{Binding NavigateCommand, Mode=OneWay}"
-                                                  CommandParameter="{Binding Text, ElementName=NavigationParameterText}" />
-            		</core:EventTriggerBehavior>
-            	</interactivity:Interaction.Behaviors>
-
-            </TextBlock>
-
-            <TextBox x:Name="NavigationParameterText"
-                     Text="Enter any text for nav..."
-                     Margin="0,0,0,20"
-                     FontSize="24"
-                     Foreground="White" />
-
-            <Button Content="Show a dialog"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    Margin="0,0,0,20"
-                    FontSize="24"
-                    Command="{Binding ShowDialogCommand, Mode=OneWay}"
-                    Foreground="White" />
-
-            <Button Content="Send message"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    Margin="0,0,0,20"
-                    FontSize="24"
-                    Command="{Binding SendMessageCommand, Mode=OneWay}"
-                    Foreground="White" />
-
-            <TextBlock TextWrapping="Wrap"
-                       Text="{Binding WelcomeTitle}"
-                       FontFamily="Segoe UI Light"
-                       FontSize="24"
-                       HorizontalAlignment="Center"
-                       TextAlignment="Center"
-                       Foreground="White" />
-
-            <TextBlock FontFamily="Segoe UI Light"
-                       FontSize="18.667"
-                       HorizontalAlignment="Center"
-                       TextAlignment="Center"
-                       Foreground="White"
-                       Margin="23.82,20,23.18,0"
-                       Text="{Binding Clock}" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Row="0" HorizontalAlignment="Center">
+            <Button Content="Create Election" Command="{Binding CreateElectionCommand}" Width="200" Margin="85,15" 
+                    Foreground="{StaticResource ButtonForegroundThemeBrush}" 
+                    Background="{StaticResource ButtonBackgroundThemeBrush}" 
+                    BorderBrush="{StaticResource ButtonBorderThemeBrush}" 
+                    BorderThickness="{StaticResource ButtonBorderThemeThickness}"></Button>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="15,15">
+                <TextBlock Margin="0,5">Available Elections</TextBlock>
+                <ComboBox ItemsSource="{Binding AvailableElections}" Width="200" Margin="15,0"></ComboBox>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="15,15">
+                <TextBlock Margin="0,5">Past Elections</TextBlock>
+                <ComboBox ItemsSource="{Binding PastElections}" Width="200" Margin="15,0"></ComboBox>
+            </StackPanel>
         </StackPanel>
+        <!--<CommandBar Grid.Row="2">
+            <AppBarButton Icon="Add" Content="Add" Label="Add"></AppBarButton>
+            <AppBarButton Icon="Remove" Content="Remove" Label="Remove"></AppBarButton>
+        </CommandBar>-->
     </Grid>
 </Page>

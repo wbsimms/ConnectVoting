@@ -8,14 +8,13 @@ namespace ConnectVoting.ViewModel
 {
 	public class ViewModelLocator
 	{
-		public const string SecondPageKey = "SecondPage";
-
+		public const string CreateElectionKey = "CreateElection";
 		static ViewModelLocator()
 		{
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
 			var nav = new NavigationService();
-			nav.Configure(SecondPageKey, typeof(SecondPage));
+			nav.Configure(CreateElectionKey, typeof(CreateElection));
 			SimpleIoc.Default.Register<INavigationService>(() => nav);
 
 			SimpleIoc.Default.Register<IDialogService, DialogService>();
@@ -36,5 +35,6 @@ namespace ConnectVoting.ViewModel
 			"CA1822:MarkMembersAsStatic",
 			Justification = "This non-static member is needed for data binding purposes.")]
 		public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+
 	}
 }

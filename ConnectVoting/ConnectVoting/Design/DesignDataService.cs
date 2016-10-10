@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ConnectVoting.Model;
 
 namespace ConnectVoting.Design
@@ -12,5 +13,7 @@ namespace ConnectVoting.Design
 			var item = new DataItem("Welcome to MVVM Light [design]");
 			return Task.FromResult(item);
 		}
+
+		public List<string> AvailableElections { get; set; } = new List<string>() {"One","Two", "Three" };
 	}
 }
